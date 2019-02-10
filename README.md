@@ -1,20 +1,15 @@
-
 =================
 
-用于新浪微博开放平台的PHP SDK. 内含能直接使用的DEMO.
+PHP SDK for Sina Weibo open platform. 
 
-SAE(Sina App Engine, http://sae.sina.com.cn )已内置SDK，不需要下载，使用前需要手工调用 require_once('saetv2.ex.class.php');
+SAE (Sina App Engine, http://sae.sina.com.cn ) has built-in SDK, no need to download, you need to manually call require_once('saetv2.ex.class.php') before use;
 
-composer
------
-composer.phar require xiaosier/libweibo:dev-master
+Composer
+Composer.phar 
 
-微博写入接口说明
------
-由于微博开放平台调整，写入接口需要都切换到share分享接口，说明在 http://open.weibo.com/blog/%E3%80%90%E5%B9%B3%E5%8F%B0%E5%85%AC%E5%91%8A%E3%80%91%E5%BE%AE%E5%8D%9A%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E5%88%86%E4%BA%AB%E5%88%B0%E5%BE%AE%E5%8D%9A%E6%8E%A5%E5%8F%A3%E5%8D%87%E7%BA%A7%E5%85%AC 这里。
-调用时需要使用$instance->share($status, $pic); 方法，示例：
+Microblog write interface description
+Due to the Weibo open platform adjustment, the write interface needs to be switched to the share sharing interface, which is indicated at http://open.weibo.com/blog/%E3%80%90%E5%B9%B3%E5%8F%B0 %E5%85%AC%E5%91%8A%E3%80%91%E5%BE%AE%E5%8D%9A%E5%BC%80%E6%94%BE%E5%B9%B3%E5 %8F%B0%E5%88%86%E4%BA%AB%E5%88%B0%E5%BE%AE%E5%8D%9A%E6%8E%A5%E5%8F%A3%E5%8D %87%E7%BA%A7%E5%85%AC here. You need to use the $instance->share($status, $pic); method when calling, for example:
 
-```
 $c = new SaeTClientV2( WB_AKEY , WB_SKEY , WB_ACCESSTOKEN );
 // 待发送的文字内容
 $status = '发送的文字内容';
@@ -23,77 +18,57 @@ $file_local = '5486087cly1fhh2yaksr1j20j60srtd0.jpg';
 // 拼接'http://weibosdk.sinaapp.com/'是因为这个share接口至少要带上一个【安全域名】下的链接。
 $ret = $c->share($status.'http://weibosdk.sinaapp.com/', $file_local);
 var_dump($ret);
-```
+Update
+Increase sharing interface on July 14, 2017
+Revised V2 version of a notice on February 20, 2013
+Revised V2 version of two hand errors on December 16, 2011
+The V2 version of the PHP SDK was released on October 21, 2011, based on the latest interface package in http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2 .
+On June 16, 2011, the OAuth2 version of the PHP SDK was released, and the Basic authentication SDK was deleted (the microblog open platform does not support Basic authentication).
+On November 17, 2010, the default callback url of the demo program was modified incorrectly in some access modes.
+On June 29, 2010, the Basic authentication version & OAuth version added the verify_credentials function to get the current user information. OAuth added update_avatar to update the avatar.
+Added support for image release on May 5, 2010 Basic certified version
+Added image support for OAuth certified version on May 12, 2010
+Description
+Demo demo address
 
-更新
------
+Demo version V2: http://weibosdk.sinaapp.com/
+Application Demo on the site: http://apps.weibo.com/weibosdk
+OAuth version of Demo: http://saettest.sinaapp.com/
+How to apply for an API Key
 
-+ 2017年7月14日 增加分享接口
-+ 2013年2月20日 修改V2版一处notice
-+ 2011年12月16日 修改V2版两处手误
-+ 2011年10月21日 发布V2版PHP SDK，基于 http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2 中的最新接口封装。
-+ 2011年6月16日 发布OAuth2版PHP SDK，删除Basic认证的SDK（微博开放平台已不支持Basic认证）
-+ 2010年11月17日 修改了demo程序默认callback url在某些访问方式下不正确的问题.
-+ 2010年6月29日Basic认证版本&OAuth版本添加verify_credentials函数,用于获取当前用户信息,OAuth添加update_avatar更新头像
-+ 2010年5月5日 Basic 认证版本添加图片发布支持
-+ 2010年5月12日 OAuth 认证版本添加图片支持
+You need to have an API Key for Sina Weibo Open Platform. Apply here: http://open.weibo.com
 
-说明
------
-**Demo演示地址**
+About the function of the Class
 
-+ V2版Demo: http://weibosdk.sinaapp.com/
-+ 站内应用Demo: http://apps.weibo.com/weibosdk
-+ OAuth版Demo: http://saettest.sinaapp.com/
+Based on OAuth authentication.
+Completed until October 21, 2011, all interface packages
+Sina Weibo V2 version PHPSDK Demo tutorial
 
-**如何申请API Key**
+1. Create an application at open.weibo.com and get the API KEY. Set the "Apply Callback Page" address in "Authorization Settings" to " http://host/callback.php", where host is the website domain name.
+2. Download Demo, then extract, modify WB_AKEY in config.php as App Key, WB_SKEY as App Secret, and WB_CALLBACK_URL as the callback page address just filled in.
+3. Upload to PHP space
+Sina Weibo station application Demo tutorial
 
-你需要有一个新浪微博开放平台的API Key.这里申请: http://open.weibo.com
+1. Create an in-site application at open.weibo.com and get the API KEY
+2. Edit the application properties and set the "Site Application Address" in the "Application Page"
+3. Download, unzip, modify WB_AKEY in config.php as App Key, WB_SKEY as App Secret, and CANVAS_PAGE as "In-Site Application Address" set in "Application Page"
+4. Upload code to PHP space
+5. Edit the application properties, set the "Application Actual Address" in the "Application Page" to the address of the apps.php that just uploaded the code, for example: " http://xxxxx.sinaapp.com/apps.php", set "Iframe" The height is "2000px.
+6. Access the “In-Site Application Address” you just set.
+OAuth version of the demo tutorial
 
-**关于Class的功能**
-
-+ 基于OAuth认证.
-+ 完成至2011年10月21日止，全部接口的封装
-
-**新浪微博V2版PHPSDK Demo使用教程**
-
-+ 1.在open.weibo.com创建应用，得到API KEY，设置“授权设置”中的“应用回调页”地址为"http://host/callback.php"，其中host为网站域名。
-+ 2.下载Demo,然后解压,修改config.php中的WB_AKEY为App Key，WB_SKEY为App Secret，WB_CALLBACK_URL为刚才填入的回调页地址。
-+ 3.上传到PHP空间即可
-
-**新浪微博站内应用Demo使用教程**
-+ 1.在open.weibo.com创建站内应用，得到API KEY
-+ 2.编辑应用属性，设置"应用页面"中的“站内应用地址”
-+ 3.下载，解压，修改config.php中的WB_AKEY为App Key，WB_SKEY为App Secret，CANVAS_PAGE为“应用页面”中设置的”站内应用地址“
-+ 4.上传代码到PHP空间
-+ 5.编辑应用属性，设置"应用页面"中的"应用实际地址"为刚刚上传代码的apps.php的地址，比如："http://xxxxx.sinaapp.com/apps.php"，设置“Iframe高度“为2000px。
-+ 6.访问刚刚设置的“站内应用地址”即可。
-
-**OAuth版Demo使用教程**
-+ 1.在open.weibo.com创建应用，得到API KEY
-+ 2.下载,然后解压,修改config.php中的WB_AKEY为App Key，WB_SKEY为App Secret。
-+ 3.上传到PHP空间即可
-
-
+1. Create an application at open.weibo.com and get the API KEY
+2. Download, then extract, modify WB_AKEY in config.php as App Key, WB_SKEY as App Secret.
+3. Upload to PHP space
 Bug tracker
------------
-
 Have a bug? Please create an issue here on GitHub!
 
-https://github.com/xiaosier/libweibo/issues
-
+Https://github.com/xiaosier/libweibo/issues
 
 Authors
--------
-
-+ http://weibo.com/lazypeople
-+ http://lazy.changes.com.cn
-
-
+Http://weibo.com/lazypeople
+Http://lazy.changes.com.cn
 License
----------------------
-
-Copyright 2011 SINA, Inc.
-Copyright 2011 SAE
+Copyright 2011 SINA, Inc. Copyright 2011 SAE
 
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
